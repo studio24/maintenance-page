@@ -71,7 +71,17 @@ $retry = new DateTime('2017-04-01 13:00');
 header('Retry-After: ' . $retry->format('D, d M Y H:i:s') . ' GMT');
 ```
 
-Also see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After
+Also see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After 
+
+### Holding Page Redirects
+
+If you want to redirect all requested URIs to the landing page via a 302 redirect then add the followig code to the conf for the site:  
+#---------------------  
+Holding page redirect  
+RewriteEngine On  
+RewriteCond %{REQUEST_URI} ^/.+$ [NC]  
+RewriteRule ^ / [R=302,L]  
+#----------------------
 
 ## Further reading
 
