@@ -9,8 +9,21 @@ To point a website at the maintenance page it is recommended to point the docume
 
 This will cause all requests to return the `index.php` page with a 503 temporarily unavailable message, with the exception of `robots.txt` file which Google recommends returns a 200 status during maintenance.
 
+If you need to access the website during maintenance we recommend setting up an alternative host name and restrict access via the Studio 24 office IP address.
+
 ## Setup
 Copy the folder `maintenance` to your project root folder, ideally outside of the document root. 
+
+The required files are:
+
+```
+└── maintenance/
+    ├── .htaccess
+    ├── index.php
+    └── robots.txt
+```
+
+The logo files are example files if you wish to store assets in other files and include these via PHP.
 
 Customise the `index.php` file to create your maintenance page. This page should be static HTML and standalone so it does not require external resources to load (since all requests for the current site are sent to this `index.php` page during maintenance. This means any images must be embedded within the page. Examples on how to implement images appears below. 
 
