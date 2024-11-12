@@ -7,16 +7,28 @@ Requires PHP 5.4+
 ## Usage
 To point a website at the maintenance page it is recommended to point the document root at the `maintenance` folder. 
 
-This will cause all requests to return the `index.php` page with a 503 temporarily unavailable message.
+This will cause all requests to return the `index.php` page with a 503 temporarily unavailable message, with the exception of `robots.txt` file which Google recommends returns a 200 status during maintenance.
 
 ## Setup
-
 Copy the folder `maintenance` to your project root folder, ideally outside of the document root. 
 
-Customise the `index.php` file to create your maintenance page. The only requirement is this page should not load any 
-external resources from the same domain, since all requests will be directed to this maintenance page.
+Customise the `index.php` file to create your maintenance page. This page should be static HTML and standalone so it does not require external resources to load (since all requests for the current site are sent to this `index.php` page during maintenance. This means any images must be embedded within the page. Examples on how to implement images appears below. 
 
-This means any images must be embedded within the page. Examples on how to implement images appears below. 
+We save this as a PHP file so we can easily control the response headers, see the example code:
+
+```php
+<?php
+// Respond with 503 Unavailable status code
+http_response_code(503);
+
+// Advise client to try again after 30 minutes (in secs)
+header('Retry-After: 1800');
+
+header('Content-Type: text/html; charset=utf-8');
+?>
+```
+
+Customise the `robots.txt` file so it matches the contents of your live site.
 
 ## Embedding images
 
@@ -73,20 +85,10 @@ header('Retry-After: ' . $retry->format('D, d M Y H:i:s') . ' GMT');
 
 Also see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After 
 
-### Holding Page Redirects
-
-If you want to redirect all requested URIs to the landing page via a 302 redirect then add the followig code to the conf for the site:  
-#---------------------  
-Holding page redirect  
-RewriteEngine On  
-RewriteCond %{REQUEST_URI} ^/.+$ [NC]  
-RewriteRule ^ / [R=302,L]  
-#----------------------
-
 ## Further reading
 
+* https://developers.google.com/search/docs/crawling-indexing/pause-online-business#best-practices-disabling-site
 * https://yoast.com/http-503-site-maintenance-seo/
-* https://webmasters.googleblog.com/2011/01/how-to-deal-with-planned-site-downtime.html
 
 ## License
 
