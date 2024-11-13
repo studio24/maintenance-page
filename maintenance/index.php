@@ -77,7 +77,7 @@ header('Content-Type: text/html; charset=utf-8');
             }
         }
     </style>
-    <div class="container">
+    <main class="container">
 
         <!-- SVG logo -->
         <h1>
@@ -100,6 +100,6 @@ header('Content-Type: text/html; charset=utf-8');
         <p>If you have any questions please contact our customer services team via email at
             <a href="mailto:hello@studio24.net">hello@studio24.net</a></p>
 
-    </div>
+    </main>
     </body>
 </html>
