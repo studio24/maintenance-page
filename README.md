@@ -17,10 +17,10 @@ Copy the folder `maintenance` to your project root folder, ideally outside of th
 The required files are:
 
 ```
-└── maintenance/
-    ├── .htaccess
-    ├── index.php
-    └── robots.txt
+maintenance/
+├── .htaccess
+├── index.php
+└── robots.txt
 ```
 
 The logo files are example files if you wish to store assets in other files and include these via PHP.
